@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react';
 
 function Projects(props) {
     const [projects, setProjects] = useState(null);
-    const getProjectsData = async () => {
-        const response = await fetch(props.URL + "projects");
-        const data = await response.json();
-        setProjects(data);
-    };
 
-    useEffect(() => getProjectsData(), []);
+    useEffect(() => {
+        const getProjectsData = async () => {
+            const response = await fetch(props.URL + "projects");
+            const data = await response.json();
+            setProjects(data);
+        };
+        getProjectsData();
+    }, [props.URL]);
 
     const loaded = () => {
         return projects.map((project) => (
